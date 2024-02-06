@@ -1,0 +1,13 @@
+<div class="container min-vh-100 d-flex align-items-center justify-content-evenly">
+  <form action="/readgame" method="POST">
+    <div class="d-flex flex-column mb-3 align-items-center">
+      <select class="form-select" aria-label="Game selection menu">
+        <option selected>Select game</option>
+        {{#each games as | game |}}
+        <option value={{game.id}}>{{game.homeTeam}} vs. {{game.visitingTeam}}</option>
+        {{/each}}
+      </select>
+      <button type="submit" class="btn btn-primary">Retrieve Game</button>
+    </div>
+  </form>
+</div>

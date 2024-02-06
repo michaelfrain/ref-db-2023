@@ -5,8 +5,9 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var createRouter = require('./routes/create');
-var editRouter = require('./routes/edit');
+var createRouter = require('./routes/creategame');
+var readRouter = require('./routes/readgame');
+var editRouter = require('./routes/updategame');
 
 var app = express();
 
@@ -19,10 +20,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use("/js", express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")));
 
 app.use('/', indexRouter);
 app.use('/create', createRouter);
 app.use('/edit', editRouter);
+app.use('/readgame', readRouter);
 
 const mongoose = require('mongoose');
 const uri = "mongodb+srv://admin:ZD71BXo4iJfRxzj1@sciac-0.koiol.mongodb.net/ufl-demo-database?retryWrites=true&w=majority";
@@ -38,6 +41,7 @@ async function run() {
   } finally {
     // Ensures that the client will close when you finish/error
     await mongoose.disconnect();
+    console.log("Deployment disconnected!");
   }
 }
 

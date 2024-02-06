@@ -1,0 +1,45 @@
+<div class="container min-vh-100 d-flex align-items-center justify-content-evenly">
+  <form action="/create" method="POST">
+  <div class="d-flex flex-column mb-3 align-items-center">
+    <div class="d-flex flex-row mb-3 align-items-center">
+      <label for="gameTimeScheduledDate" class="col-form-label">Scheduled Date</label>
+      <input type="date" class="form-control" name="gameTimeScheduledDate" id="gameTimeScheduledDate">
+    </div>
+    <div class="d-flex flex-row mb-3 align-items-center">
+      <label for="gameTimeScheduledTime" class="col-form-label">Scheduled Time</label>
+      <input type="time" class="form-control" name="gameTimeScheduledTime" id="gameTimeScheduledTime">
+    </div>
+    <div class="d-flex flex-row mb-3 align-items-center">
+      <label for="gameTimeStartTime" class="col-form-label">Actual Start Time</label>
+      <input type="time" class="form-control" name="gameTimeStartTime" id="gameTimeStartTime">
+    </div>
+    <div class="d-flex flex-row mb-3 align-items-center">
+      <label for="gameDuration" class="col-form-label">Game time (in minutes)</label>
+      <input type="number" class="form-control" name="gameDuration" id="gameDuration" placeholder="0">
+    </div>
+  </div>
+  <div class="d-flex flex-column mb-3 align-items-center">
+    <div class="d-flex flex-row mb-3 align-items-center">
+      <label for="homeTeam" class="col-form-label">Home</label>
+      <input type="text" class="form-control" name="homeTeam" id="homeTeam" placeholder="Home Team">
+      <input type="number" class="form-control" name="homeScore" id="homeScore" placeholder="Score">
+    </div>
+    <div class="d-flex flex-row mb-3 align-items-center">
+      <label for="visitingTeam" class="col-form-label">Visitor</label>
+      <input type="text" class="form-control" name="visitingTeam" id="visitingTeam" placeholder="Visiting Team">
+      <input type="number" class="form-control" name="visitorScore" id="visitorScore" placeholder="Score">
+    </div>
+  </div>
+  <div class="d-flex flex-column mb-3 align-items-center">
+    <input type="text" class="form-control" name="referee" id="referee" placeholder="Referee">
+    <input type="text" class="form-control" name="umpire" id="umpire" placeholder="Umpire">
+    <input type="text" class="form-control" name="headLine" id="headLine" placeholder="Head Line Judge">
+    <input type="text" class="form-control" name="lineJudge" id="lineJudge" placeholder="Line Judge">
+    <input type="text" class="form-control" name="fieldJudge" id="fieldJudge" placeholder="Field Judge">
+    <input type="text" class="form-control" name="sideJudge" id="sideJudge" placeholder="Side Judge">
+    <input type="text" class="form-control" name="backJudge" id="backJudge" placeholder="Back Judge">
+    <br />
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+  </form>
+</div>
