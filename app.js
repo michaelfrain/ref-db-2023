@@ -5,7 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var createRouter = require('./routes/create');
+var editRouter = require('./routes/edit');
 
 var app = express();
 
@@ -20,7 +21,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/create', createRouter);
+app.use('/edit', editRouter);
 
 const mongoose = require('mongoose');
 const uri = "mongodb+srv://admin:ZD71BXo4iJfRxzj1@sciac-0.koiol.mongodb.net/ufl-demo-database?retryWrites=true&w=majority";
