@@ -39,7 +39,6 @@
       <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
             <th scope="col">Report</th>
             <th scope="col">Period</th>
             <th scope="col">Time</th>
@@ -57,16 +56,15 @@
         <tbody>
           {{#each plays as | play |}}
           <tr>
-            <th scope="row">{{@index}}</th>
-            <td>{{play.type}}</td>
+            <td style="text-transform:capitalize;">{{play.type}}</td>
             <td>{{play.period}}</td>
             <td>{{time}}</td>
-            <td>{{play.playType}}</td>
+            <td style="text-transform:capitalize;">{{play.playType}}</td>
             <td>{{play.playNumber}}</td>
             <td>{{play.foulCode}}</td>
             <td>{{play.category}}</td>
-            <td>{{play.acceptDecline}}</td>
-            <td>{{play.sideOfBall}}</td>
+            <td style="text-transform:capitalize;">{{play.acceptDecline}}</td>
+            <td style="text-transform:capitalize;">{{play.sideOfBall}}</td>
             <td>{{play.team}}</td>
             <td>{{play.player}}</td>
             <td>{{officials}}</td>
