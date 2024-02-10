@@ -1,13 +1,92 @@
 <div class="container min-vh-100 d-flex align-items-center justify-content-evenly">
-  <form action="/readgame" method="POST">
+  <div class="d-flex flex-row mb-3 justify-items-evenly">
     <div class="d-flex flex-column mb-3 align-items-center">
-      <select class="form-select" aria-label="Game selection menu">
+      <select class="form-select" id="game-selection-menu" aria-label="Game selection menu">
         <option selected>Select game</option>
         {{#each games as | game |}}
         <option value={{game.id}}>{{game.homeTeam}} vs. {{game.visitingTeam}}</option>
         {{/each}}
       </select>
-      <button type="submit" class="btn btn-primary">Retrieve Game</button>
+      <a class="btn btn-primary" href="/readgame/{{game.id}}" role="button">Retrieve game</a>
+      <a class="btn btn-primary" href="/readplay/{{game.id}}" role="button">Retrieve foul report</a>
+      {{#if displayGame}}
+      <table class="table">
+        <tbody>
+          <tr>
+            <td scope="row">Scheduled Start</td>
+            <td>{{readableSchedDate}}</td>
+          </tr>
+          <tr>
+            <td scope="row">Actual Start</td>
+            <td>{{readableStartDate}}</td>
+          </tr>
+          <tr>
+            <td scope="row">Home Team</td>
+            <td>{{game.homeTeam}}</td>
+            <td>Score</td>
+            <td>{{game.homeScore}}</td>
+          </tr>
+          <tr>
+            <td scope="row">Visiting Team</td>
+            <td>{{game.visitingTeam}}</td>
+            <td>Score</td>
+            <td>{{game.visitorScore}}</td>
+          </tr>
+        </tbody>
+      </table>
+      {{/if}}
+      {{#if displayFouls}}
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Report</th>
+            <th scope="col">Period</th>
+            <th scope="col">Time</th>
+            <th scope="col">Play type</th>
+            <th scope="col">Play #</th>
+            <th scope="col">Foul</th>
+            <th scope="col">Category</th>
+            <th scope="col">ACC/DEC</th>
+            <th scope="col">ODRK</th>
+            <th scope="col">Team</th>
+            <th scope="col">Player</th>
+            <th scope="col">Official</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each plays as | play |}}
+          <tr>
+            <th scope="row">{{@index}}</th>
+            <td>{{play.type}}</td>
+            <td>{{play.period}}</td>
+            <td>{{time}}</td>
+            <td>{{play.playType}}</td>
+            <td>{{play.playNumber}}</td>
+            <td>{{play.foulCode}}</td>
+            <td>{{play.category}}</td>
+            <td>{{play.acceptDecline}}</td>
+            <td>{{play.sideOfBall}}</td>
+            <td>{{play.team}}</td>
+            <td>{{play.player}}</td>
+            <td>{{officials}}</td>
+            <td><a href=/plays/{{play._id}}/edit>Edit play</a></td>
+          </tr>
+          {{/each}}
+        </tbody>
+      </table>
+      {{/if}}
     </div>
-  </form>
+    <script>
+      document.getElementsByClassName("btn btn-primary")[0].addEventListener("click", function(event) {
+        var value = document.getElementById("game-selection-menu").value;
+        event.target.setAttribute("href", "/readgame/" + value);
+      });
+
+      document.getElementsByClassName("btn btn-primary")[1].addEventListener("click", function(event) {
+        var value = document.getElementById("game-selection-menu").value;
+        event.target.setAttribute("href", "/readplay/" + value);
+      });
+    </script>
+  </div>
 </div>

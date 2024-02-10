@@ -1,0 +1,107 @@
+<div class="container min-vh-100 d-flex align-items-center justify-content-evenly">
+  <div class="d-flex flex-row mb-3 justify-items-evenly">
+    <div class="d-flex flex-column mb-3 align-items-center">
+      <select class="form-select" id="game-selection-menu" aria-label="Game selection menu">
+        <option selected>Select game</option>
+        {{#each games as | game |}}
+        <option value={{game.id}}>{{game.homeTeam}} vs. {{game.visitingTeam}}</option>
+        {{/each}}
+      </select>
+      <a class="btn btn-primary" href="/createplay/{{game.id}}" role="button">Retrieve game</a>
+      {{#if displayFoulInput}}
+      <form action="/createplay" method="POST">
+        <div class="d-flex flex-row mb-3 align-items-center">
+          <label class="col-form-label">Game ID</label>
+          <input class="form-control" type="text" name="gameId" value="{{game.id}}" aria-label="Game identifier" disabled readonly>
+        </div>
+        <div class="d-flex flex-row mb-3 align-items-center">
+          <select class="form-select" name="typeSelection" id="type-selection" aria-label="Type selection">
+            <option selected>Select report type</option>
+            <option value="foul">Foul</option>
+            <option value="report">Report</option>
+            <option value="comment">Comment</option>
+          </select>
+        </div>
+        <div class="d-flex flex-row mb-3 align-items-center">
+          <label class="col-form-label">Period</label>
+          <input type="number" class="form-control" name="period" id="period" placeholder="Period">
+          <label class="col-form-label">Time</label>
+          <input type="number" class="form-control" name="minutes" id="minutes" placeholder="Min">
+          <label>:</label>
+          <input type="number" class="form-control" name="seconds" id="seconds" placeholder="Sec">
+        </div>
+        <div class="d-flex flex-row mb-3 align-items-center">
+          <label class="col-form-label">Play Type</label>
+          <select class="form-select" name="playTypeSelection" id="play-type-selection" aria-label="Play type selection">
+            <option selected>Select play type</option>
+            <option value="deadball">Dead Ball</option>
+            <option value="run">Run</option>
+            <option value="pass">Pass</option>
+            <option value="fg">Field Goal</option>
+            <option value="punt">Punt</option>
+            <option value="try">Try</option>
+            <option value="freekick">Free Kick</option>
+          </select>
+          <label class="col-form-label">Play #</label>
+          <input type="number" class="form-control" name="playNumber" id="playnumber" placeholder="Play #">
+        </div>
+        <div class="d-flex flex-row mb-3 align-items-center">
+          <label class="col-form-label">Foul Code</label>
+          <input type="text" class="form-control" name="foulcode" id="foulcode" placeholder="Foul">
+          <label class="col-form-label">Category</label>
+          <input type="text" class="form-control" name="category" id="category" placeholder="Category">
+        </div>
+        <div class="d-flex flex-row mb-3 align-items-center">
+          <select class="form-select" name="ado" id="ado" aria-label="Accept/Decline/Offset">
+            <option selected>Acc/Dec/Off/Wave</option>
+            <option value="accept">Accept</option>
+            <option value="decline">Decline</option>
+            <option value="offset">Offset</option>
+            <option value="waveoff">Wave-off</option>
+          </select>
+          <select class="form-select" name="sideOfBall" id="sideofball" aria-label="Side of ball">
+            <option selected>Side of ball</option>
+            <option value="offense">Offense</option>
+            <option value="defense">Defense</option>
+            <option value="kickers">Kickers</option>
+            <option value="receivers">Receivers</option>
+          </select>
+        </div>
+        <div class="d-flex flex-row mb-3 align-items-center">
+          <select class="form-select" name="team" id="team" aria-label="Team">
+            <option selected>Team</option>
+            <option value="{{game.homeTeam}}">{{game.homeTeam}}</option>
+            <option value="{{game.visitingTeam}}">{{game.visitingTeam}}</option>
+          </select>
+          <input type="number" class="form-control" name="number" id="number" placeholder="Player #">
+          <input class="form-check-input" type="checkbox" value="" id="headcoach">
+          <label class="form-check-label" for="headcoach">Head coach</label>
+          <input class="form-check-input" type="checkbox" value="" id="asstcoach">
+          <label class="form-check-label" for="asstcoach">Asst. Coach</label>
+          <input class="form-check-input" type="checkbox" value="" id="nonumber">
+          <label class="form-check-label" for="nonumber">No number</label>
+          <input class="form-check-input" type="checkbox" value="" id="entireteam">
+          <label class="form-check-label" for="entireteam">Entire team</label>
+        </div>
+        <div class="d-flex flex-row mb-3 align-items-center">
+          <select class="form-select" name="official" id="official" aria-label="Official">
+            <option selected>Calling official</option>
+            {{#each game.crew as | official |}}
+            <option value={{official}}>{{official}}</option>
+            {{/each}}
+          </select>
+        </div>
+        <div class="d-flex flex-row mb-3 align-items-center">
+          <button type="submit" class="btn btn-primary" formaction="/createplay/{{game.id}}">Submit</button>
+        </div>
+      </form>
+    </div>
+  {{/if}}
+  </div>
+</div>
+<script>
+  document.getElementsByClassName("btn btn-primary")[0].addEventListener("click", function(event) {
+    var value = document.getElementById("game-selection-menu").value;
+    event.target.setAttribute("href", "/createplay/" + value);
+  });
+</script>

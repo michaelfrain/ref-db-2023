@@ -8,6 +8,8 @@ var indexRouter = require('./routes/index');
 var createRouter = require('./routes/creategame');
 var readRouter = require('./routes/readgame');
 var editRouter = require('./routes/updategame');
+var createPlayRouter = require('./routes/createplay');
+var readPlayRouter = require('./routes/readplay');
 
 var app = express();
 
@@ -23,9 +25,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use("/js", express.static(path.join(__dirname, "node_modules/bootstrap/dist/js")));
 
 app.use('/', indexRouter);
-app.use('/create', createRouter);
+app.use('/creategame', createRouter);
 app.use('/edit', editRouter);
 app.use('/readgame', readRouter);
+app.use('/createplay', createPlayRouter);
+app.use('/readplay', readPlayRouter);
 
 const mongoose = require('mongoose');
 const uri = "mongodb+srv://admin:ZD71BXo4iJfRxzj1@sciac-0.koiol.mongodb.net/ufl-demo-database?retryWrites=true&w=majority";
@@ -33,16 +37,10 @@ const uri = "mongodb+srv://admin:ZD71BXo4iJfRxzj1@sciac-0.koiol.mongodb.net/ufl-
 const clientOptions = { serverApi: { version: '1', strict: true, deprecationErrors: true } };
 
 async function run() {
-  try {
-    // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
-    await mongoose.connect(uri, clientOptions);
-    await mongoose.connection.db.admin().command({ ping: 1 });
-    console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    // Ensures that the client will close when you finish/error
-    await mongoose.disconnect();
-    console.log("Deployment disconnected!");
-  }
+  // Create a Mongoose client with a MongoClientOptions object to set the Stable API version
+  await mongoose.connect(uri, clientOptions);
+  await mongoose.connection.db.admin().command({ ping: 1 });
+  console.log("Pinged your deployment. You successfully connected to MongoDB!");
 }
 
 run().catch(console.dir);
